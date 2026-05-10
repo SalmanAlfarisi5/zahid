@@ -115,39 +115,59 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Avatar */}
+          {/* Right: Profile photo */}
           <div className="hero-avatar-wrap" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-            <div style={{
-              width: 260, height: 260, borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--accent) 0%, #F5D070 60%, #C9A227 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '4.5rem', fontWeight: 900, color: 'var(--primary)',
-              border: '5px solid rgba(255,255,255,0.18)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.35)',
-              position: 'relative',
-              letterSpacing: '-0.03em',
-            }}>
-              ZAS
+            {/* Photo ring */}
+            <div style={{ position: 'relative' }}>
+              {/* Outer glow ring */}
               <div style={{
-                position: 'absolute', bottom: 14, right: 10,
-                width: 50, height: 50, borderRadius: '50%',
-                background: '#10B981', border: '3px solid rgba(255,255,255,0.9)',
+                width: 284, height: 284, borderRadius: '50%',
+                background: 'linear-gradient(135deg, var(--accent) 0%, rgba(201,162,39,0.3) 100%)',
+                padding: 4,
+                boxShadow: '0 24px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)',
+              }}>
+                <div style={{
+                  width: '100%', height: '100%', borderRadius: '50%',
+                  overflow: 'hidden',
+                  background: 'var(--primary)',
+                }}>
+                  <img
+                    src="/foto.jpeg"
+                    alt="Muhammad Zahid As Shidqi"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 15%',
+                      display: 'block',
+                    }}
+                  />
+                </div>
+              </div>
+              {/* Badge pin */}
+              <div style={{
+                position: 'absolute', bottom: 12, right: 8,
+                width: 52, height: 52, borderRadius: '50%',
+                background: 'linear-gradient(135deg, #C9A227, #F5D070)',
+                border: '3px solid white',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '1.4rem', boxShadow: '0 4px 12px rgba(16,185,129,0.4)',
+                fontSize: '1.5rem',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
               }}>
                 🏆
               </div>
             </div>
+
             <div style={{ textAlign: 'center' }}>
-              <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.9rem', fontWeight: 500 }}>
+              <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem', fontWeight: 600 }}>
                 Class 11 IPS · SMA IAS Al-Jannah
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.8rem', marginTop: 4 }}>
+              <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.78rem', marginTop: 4 }}>
                 Born in Niigata, Japan · Feb 23, 2009
               </div>
             </div>
 
-            {/* Small info chips */}
+            {/* Info chips */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
               {[
                 { icon: '📧', text: 'zahid23022009@gmail.com' },

@@ -3,7 +3,6 @@ const profileInfo = [
   { label: 'Date of Birth', value: 'Niigata, 23 February 2009' },
   { label: 'Location',     value: 'Cibubur, Depok, West Java' },
   { label: 'School',       value: 'SMA IAS Al-Jannah (Class 11 IPS)' },
-  { label: 'NISN',         value: '0092194855' },
   { label: 'Email',        value: 'zahid23022009@gmail.com' },
   { label: 'Phone',        value: '+62 813-2208-5884' },
   { label: 'Instagram',    value: '@zahid.asshidqi' },
