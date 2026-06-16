@@ -1,8 +1,11 @@
+import { ChevronDown } from './Icons';
+
+// Distinct from the StatsBar below (which covers IDR 95M / 1,300+ / 1.6M+ etc.)
 const quickStats = [
-  { value: 'IDR 95M',  label: 'Fundraised' },
-  { value: '1,300+',   label: 'Students Impacted' },
-  { value: '1.6M+',    label: 'Students Represented' },
-  { value: '5+',       label: 'Gold Medals' },
+  { value: '5+',    label: 'Gold Medals' },
+  { value: '7',     label: 'Corporate Sponsors' },
+  { value: '100+',  label: 'Schools Reached' },
+  { value: '12',    label: 'Ambassadors Led' },
 ];
 
 export default function Hero() {
@@ -51,7 +54,7 @@ export default function Hero() {
                   fontSize: '0.78rem', fontWeight: 600,
                   backdropFilter: 'blur(8px)',
                 }}>
-                  {b.icon} {b.text}
+                  <span aria-hidden="true">{b.icon}</span> {b.text}
                 </span>
               ))}
             </div>
@@ -107,7 +110,7 @@ export default function Hero() {
                   <div style={{ fontSize: '1.65rem', fontWeight: 800, color: 'var(--accent)', lineHeight: 1 }}>
                     {s.value}
                   </div>
-                  <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.55)', marginTop: 4 }}>
+                  <div style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)', marginTop: 4 }}>
                     {s.label}
                   </div>
                 </div>
@@ -120,7 +123,7 @@ export default function Hero() {
             {/* Photo ring */}
             <div style={{ position: 'relative' }}>
               {/* Outer glow ring */}
-              <div style={{
+              <div className="hero-photo-ring" style={{
                 width: 284, height: 284, borderRadius: '50%',
                 background: 'linear-gradient(135deg, var(--accent) 0%, rgba(201,162,39,0.3) 100%)',
                 padding: 4,
@@ -133,7 +136,11 @@ export default function Hero() {
                 }}>
                   <img
                     src="/foto.jpeg"
-                    alt="Muhammad Zahid As Shidqi"
+                    alt="Portrait of Muhammad Zahid As Shidqi"
+                    width="284"
+                    height="284"
+                    fetchPriority="high"
+                    decoding="async"
                     style={{
                       width: '100%',
                       height: '100%',
@@ -153,7 +160,7 @@ export default function Hero() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '1.5rem',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
-              }}>
+              }} aria-hidden="true">
                 🏆
               </div>
             </div>
@@ -168,7 +175,7 @@ export default function Hero() {
             </div>
 
             {/* Info chips */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
+            <div className="hero-info-chips" style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
               {[
                 { icon: '📧', text: 'zahid23022009@gmail.com' },
                 { icon: '📍', text: 'Depok, Jawa Barat' },
@@ -180,7 +187,7 @@ export default function Hero() {
                   borderRadius: 'var(--radius-sm)',
                   padding: '8px 14px', fontSize: '0.78rem', color: 'rgba(255,255,255,0.7)',
                 }}>
-                  {c.icon} {c.text}
+                  <span aria-hidden="true">{c.icon}</span> {c.text}
                 </div>
               ))}
             </div>
@@ -189,14 +196,14 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div style={{
+      <a href="#about" aria-label="Scroll to content" style={{
         position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        color: 'rgba(255,255,255,0.3)', fontSize: '0.7rem', letterSpacing: '0.1em',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+        color: 'rgba(255,255,255,0.55)', fontSize: '0.7rem', letterSpacing: '0.1em',
       }}>
         <span style={{ textTransform: 'uppercase' }}>Scroll</span>
-        <div style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, rgba(255,255,255,0.3), transparent)' }} />
-      </div>
+        <ChevronDown size={18} />
+      </a>
     </section>
   );
 }

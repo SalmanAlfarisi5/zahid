@@ -19,7 +19,7 @@ export default function StatsBar() {
                 borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none',
               }}
             >
-              <div style={{ fontSize: '2rem', marginBottom: 10 }}>{s.icon}</div>
+              <div style={{ fontSize: '2rem', marginBottom: 10 }} aria-hidden="true">{s.icon}</div>
               <div style={{ fontSize: '1.85rem', fontWeight: 800, color: s.color, lineHeight: 1 }}>{s.value}</div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 6, lineHeight: 1.5 }}>{s.label}</div>
             </div>

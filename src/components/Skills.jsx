@@ -1,3 +1,5 @@
+import useInView from '../hooks/useInView';
+
 const skills = [
   { icon: '🎤', label: 'Public Speaking',            level: 95, note: 'Debate champion, professional MC' },
   { icon: '🧠', label: 'Critical Thinking & Debate', level: 90, note: 'National-level academic competitions' },
@@ -19,6 +21,7 @@ const softSkills = [
 ];
 
 export default function Skills() {
+  const [gridRef, gridIn] = useInView({ threshold: 0.1 });
   return (
     <section id="skills" style={{ background: 'var(--bg-alt)' }}>
       <div className="container">
@@ -28,7 +31,7 @@ export default function Skills() {
           A unique combination of athletic, academic, and leadership competencies proven at national level.
         </p>
 
-        <div className="grid-2">
+        <div className="grid-2" ref={gridRef}>
           {/* Skill bars */}
           <div>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary)', marginBottom: 24 }}>
@@ -39,12 +42,14 @@ export default function Skills() {
                 <div key={s.label}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, alignItems: 'center' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, fontSize: '0.87rem' }}>
-                      {s.icon} {s.label}
+                      <span aria-hidden="true">{s.icon}</span> {s.label}
                     </span>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{s.level}%</span>
                   </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${s.level}%` }} />
+                  <div className="progress-bar"
+                    role="progressbar" aria-label={s.label}
+                    aria-valuenow={s.level} aria-valuemin={0} aria-valuemax={100}>
+                    <div className="progress-fill" style={{ width: gridIn ? `${s.level}%` : '0%' }} />
                   </div>
                   <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)', marginTop: 4 }}>{s.note}</div>
                 </div>
@@ -65,7 +70,7 @@ export default function Skills() {
                   borderRadius: 'var(--radius-sm)', padding: '14px 16px',
                   boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
                 }}>
-                  <span style={{ fontSize: '1.4rem' }}>{s.icon}</span>
+                  <span style={{ fontSize: '1.4rem' }} aria-hidden="true">{s.icon}</span>
                   <span style={{ fontSize: '0.83rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{s.label}</span>
                 </div>
               ))}
@@ -92,8 +97,10 @@ export default function Skills() {
                     <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{r.label}</span>
                     <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{r.pct}%</span>
                   </div>
-                  <div className="progress-bar">
-                    <div style={{ height: '100%', width: `${r.pct}%`, background: r.color, borderRadius: 100 }} />
+                  <div className="progress-bar"
+                    role="progressbar" aria-label={r.label}
+                    aria-valuenow={r.pct} aria-valuemin={0} aria-valuemax={100}>
+                    <div style={{ height: '100%', width: gridIn ? `${r.pct}%` : '0%', background: r.color, borderRadius: 100 }} />
                   </div>
                 </div>
               ))}

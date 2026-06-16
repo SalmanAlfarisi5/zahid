@@ -12,7 +12,7 @@ export default function Footer() {
         <div>
           <div style={{ fontWeight: 800, color: 'white', fontSize: '1rem', marginBottom: 4 }}>
             Muhammad Zahid As Shidqi
-            <span style={{ color: 'var(--accent)', marginLeft: 8 }}>·</span>
+            <span style={{ color: 'var(--accent)', marginLeft: 8 }} aria-hidden="true">·</span>
           </div>
           <div style={{ fontSize: '0.8rem' }}>
             SMA IAS Al-Jannah · Class 11 IPS · Depok, West Java

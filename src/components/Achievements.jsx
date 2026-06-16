@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 const tabs = [
-  { id: 'academic',  label: '🎓 Academic'  },
-  { id: 'sports',    label: '⚽ Sports'    },
-  { id: 'debate',    label: '🎤 Debate'    },
-  { id: 'religious', label: '📖 Religious' },
-  { id: 'leadership',label: '🌟 Leadership'},
+  { id: 'academic',  icon: '🎓', label: 'Academic'  },
+  { id: 'sports',    icon: '⚽', label: 'Sports'    },
+  { id: 'debate',    icon: '🎤', label: 'Debate'    },
+  { id: 'religious', icon: '📖', label: 'Religious' },
+  { id: 'leadership',icon: '🌟', label: 'Leadership'},
 ];
 
 const data = {
@@ -52,6 +52,7 @@ const data = {
   ],
 };
 
+// eslint-disable-next-line react/prop-types
 function AchItem({ icon, title, body, badge, badgeClass }) {
   return (
     <div className="ach-item">
@@ -61,7 +62,7 @@ function AchItem({ icon, title, body, badge, badgeClass }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: '1.3rem', flexShrink: 0,
         boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-      }}>
+      }} aria-hidden="true">
         {icon}
       </div>
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -95,8 +96,9 @@ export default function Achievements() {
               key={t.id}
               className={`tab-btn ${active === t.id ? 'active' : ''}`}
               onClick={() => setActive(t.id)}
+              aria-pressed={active === t.id}
             >
-              {t.label}
+              <span aria-hidden="true">{t.icon}</span> {t.label}
             </button>
           ))}
         </div>

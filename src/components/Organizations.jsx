@@ -80,7 +80,7 @@ export default function Organizations() {
                   width: 48, height: 48, borderRadius: 12,
                   background: o.bgColor, display: 'flex', alignItems: 'center',
                   justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0,
-                }}>
+                }} aria-hidden="true">
                   {o.icon}
                 </div>
                 <div>

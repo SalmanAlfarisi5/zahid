@@ -1,48 +1,65 @@
+import { Tv, Newspaper, PenLine, School, Instagram } from './Icons';
+
 const mediaItems = [
   {
     outlet: 'Kompas TV',
     type: 'Video Feature',
-    icon: '📺',
+    Icon: Tv,
     year: '2024',
     color: '#E85D04',
     bgColor: '#FFF3E0',
     title: 'Liga Kompas Kacang Garuda – National Football Coverage',
     desc: 'Featured on Kompas TV national broadcast during the Liga Kompas Kacang Garuda U-14 competition, representing Buperta Cibubur.',
     badge: 'TV Feature',
+    href: null, // add the article/video URL here to make this a link
   },
   {
     outlet: 'Kompas.id',
     type: 'News Article',
-    icon: '📰',
+    Icon: Newspaper,
     year: '2024',
     color: '#1B3A6B',
     bgColor: '#EBF0FF',
     title: 'Buperta Cibubur dan M-Private Menang Tipis Pada Pekan Kesepuluh Liga Kompas Kacang Garuda U-14',
     desc: 'Named in a Kompas.id article covering the Liga Kompas Kacang Garuda U-14 national football league.',
     badge: 'Article',
+    href: null,
   },
   {
     outlet: 'Kompasiana',
     type: 'Feature Story',
-    icon: '✍️',
+    Icon: PenLine,
     year: '2025',
     color: '#059669',
     bgColor: '#ECFDF5',
     title: '"Dulu Aku Korban Bullying" – Zahid, Duta SMA Jawa Barat 2025',
     desc: 'A personal story feature about Zahid\'s journey from bullying victim to West Java\'s top student ambassador — published on Kompasiana.',
     badge: 'Profile Feature',
+    href: null,
   },
   {
     outlet: 'Sekolah Al-Jannah',
     type: 'School Article',
-    icon: '🏫',
+    Icon: School,
     year: '2024',
     color: '#6366F1',
     bgColor: '#EEF2FF',
     title: 'Finalis Astra Honda Motor Best Student 2024',
     desc: 'School article covering Zahid\'s participation and achievements in the Astra Honda Motor Best Student competition.',
     badge: 'School News',
+    href: null,
   },
+];
+
+const socialAccounts = [
+  { handle: '@psf.academy',         label: 'PSF Football Academy' },
+  { handle: '@sekolah_iasaljannah', label: 'SMA IAS Al-Jannah' },
+  { handle: '@ajssr_2025',          label: 'AJSSR 2025' },
+  { handle: '@almuhtadun_rima',     label: 'Remaja Masjid Al-Muhtadun' },
+  { handle: '@osis.smaaljannah',    label: 'OSIS SMA Al-Jannah' },
+  { handle: '@jktfootballexpo',     label: 'Jakarta Football Expo' },
+  { handle: '@ligakg.u14',          label: 'Liga Kompas Garuda U-14' },
+  { handle: '@zahid.asshidqi',      label: 'Personal Profile' },
 ];
 
 export default function Media() {
@@ -63,11 +80,10 @@ export default function Media() {
                 <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                   <div style={{
                     width: 44, height: 44, borderRadius: 10,
-                    background: m.bgColor,
+                    background: m.bgColor, color: m.color,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '1.4rem',
                   }}>
-                    {m.icon}
+                    <m.Icon size={22} />
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '0.95rem', color: m.color }}>{m.outlet}</div>
@@ -90,17 +106,19 @@ export default function Media() {
                 </p>
               </div>
 
-              {/* Divider */}
-              <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14 }}>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  fontSize: '0.78rem', color: 'var(--text-muted)',
-                  background: 'var(--bg-alt)', padding: '6px 12px',
-                  borderRadius: 100, border: '1px solid var(--border)',
-                }}>
-                  <span style={{ fontSize: '0.85rem' }}>🔗</span>
-                  {m.outlet} Archive
-                </div>
+              {/* Footer: real link if available, otherwise a neutral source label */}
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: 14, marginTop: 'auto' }}>
+                {m.href ? (
+                  <a href={m.href} target="_blank" rel="noopener noreferrer"
+                    className="badge badge-navy"
+                    style={{ textDecoration: 'none' }}>
+                    Read on {m.outlet} ↗
+                  </a>
+                ) : (
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+                    Featured in {m.outlet}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -116,27 +134,34 @@ export default function Media() {
             Related Social & Org Accounts
           </h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
-            {[
-              { handle: '@psf.academy',             label: 'PSF Football Academy' },
-              { handle: '@sekolah_iasaljannah',      label: 'SMA IAS Al-Jannah' },
-              { handle: '@ajssr_2025',               label: 'AJSSR 2025' },
-              { handle: '@almuhtadun_rima',          label: 'Remaja Masjid Al-Muhtadun' },
-              { handle: '@osis.smaaljannah',         label: 'OSIS SMA Al-Jannah' },
-              { handle: '@jktfootballexpo',          label: 'Jakarta Football Expo' },
-              { handle: '@ligakg.u14',               label: 'Liga Kompas Garuda U-14' },
-              { handle: '@zahid.asshidqi',           label: 'Personal Profile' },
-            ].map(a => (
-              <div key={a.handle} style={{
-                display: 'flex', alignItems: 'center', gap: 10,
-                background: 'white', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-sm)', padding: '10px 14px',
-              }}>
-                <span style={{ fontSize: '1rem' }}>📱</span>
+            {socialAccounts.map(a => (
+              <a
+                key={a.handle}
+                href={`https://www.instagram.com/${a.handle.replace('@', '')}`}
+                target="_blank" rel="noopener noreferrer"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  background: 'white', border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-sm)', padding: '10px 14px',
+                  transition: 'border-color 0.2s, box-shadow 0.2s',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = 'var(--primary)';
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(27,58,107,0.09)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = 'var(--border)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <span style={{ color: 'var(--primary)', display: 'flex', flexShrink: 0 }}>
+                  <Instagram size={18} />
+                </span>
                 <div>
                   <div style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--primary)' }}>{a.handle}</div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{a.label}</div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>

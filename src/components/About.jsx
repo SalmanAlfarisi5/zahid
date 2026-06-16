@@ -1,3 +1,5 @@
+import useInView from '../hooks/useInView';
+
 const profileInfo = [
   { label: 'Full Name',    value: 'Muhammad Zahid As Shidqi' },
   { label: 'Date of Birth', value: 'Niigata, 23 February 2009' },
@@ -29,6 +31,7 @@ const scholarships = [
 ];
 
 export default function About() {
+  const [langRef, langIn] = useInView();
   return (
     <section id="about" style={{ background: 'var(--bg)' }}>
       <div className="container">
@@ -70,7 +73,7 @@ export default function About() {
                   background: 'var(--bg-alt)', border: '1px solid var(--border)',
                   fontSize: '0.83rem', fontWeight: 500, color: 'var(--text-secondary)',
                 }}>
-                  {i.icon} {i.label}
+                  <span aria-hidden="true">{i.icon}</span> {i.label}
                 </span>
               ))}
             </div>
@@ -81,15 +84,17 @@ export default function About() {
             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--primary)', marginBottom: 18 }}>
               Languages
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
+            <div ref={langRef} style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 36 }}>
               {languages.map(l => (
                 <div key={l.lang}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                     <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>{l.lang}</span>
                     <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{l.level}</span>
                   </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: `${l.pct}%` }} />
+                  <div className="progress-bar"
+                    role="progressbar" aria-label={`${l.lang} proficiency`}
+                    aria-valuenow={l.pct} aria-valuemin={0} aria-valuemax={100}>
+                    <div className="progress-fill" style={{ width: langIn ? `${l.pct}%` : '0%' }} />
                   </div>
                 </div>
               ))}
@@ -120,7 +125,7 @@ export default function About() {
                   background: 'var(--bg-alt)', borderRadius: 'var(--radius-sm)',
                   padding: '12px 16px', border: '1px solid var(--border)',
                 }}>
-                  <span style={{ fontSize: '1.15rem', flexShrink: 0 }}>{s.icon}</span>
+                  <span style={{ fontSize: '1.15rem', flexShrink: 0 }} aria-hidden="true">{s.icon}</span>
                   <span style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.5 }}>
                     {s.text}
                   </span>
